@@ -10,7 +10,7 @@ class SignupPage extends React.Component {
 				<h1>this is the signup page</h1>
 				<SignupForm />
 				<h2>already have an account? <Link to="/login">login</Link></h2>
-				<Link to="/"><i class="home icon"></i></Link>
+				<Link to="/"><i class="circular home icon"></i></Link>
 			</div>
 		);
 	}
