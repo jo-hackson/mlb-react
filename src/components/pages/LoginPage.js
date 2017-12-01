@@ -5,14 +5,9 @@ import KidsLoginForm from '../forms/KidsLoginForm';
 import SignupForm from '../forms/SignupForm';
 import Tabs from '../pieces/Tabs';
 import Pane from '../pieces/Pane';
-import ParentLoginForm from '../forms/ParentsLoginForm';
-import KidLoginForm from '../forms/KidsLoginForm';
 
 class LoginPage extends React.Component {
   
-
-
-
 	render() { 
 		return (
 			<div>
@@ -33,10 +28,9 @@ class LoginPage extends React.Component {
 		  		</Pane>
 		  	</Tabs>
 
-		  	<Link to="/">home</Link>
+		  	<h2>first time here? then click here to <Link to="/signup">sign up</Link></h2>
+		  	<Link to="/"><i class="home icon"></i></Link>
 			</div>
-
-
 		);
 	}
 
