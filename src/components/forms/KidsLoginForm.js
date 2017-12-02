@@ -63,13 +63,14 @@ class KidsLoginForm extends React.Component{
 							value={data.password}
 							onChange={this.onChange}
 						/>
+						{errors.password && <InlineError text={errors.password} />}
 					</Form.Field>
 					<Button primary>login</Button>
 				</Form>
 		  </div>
 		);
 	}
-};
+}
 
 KidsLoginForm.propTypes = {
 	submit: PropTypes.func.isRequired

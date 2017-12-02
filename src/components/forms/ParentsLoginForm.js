@@ -70,7 +70,6 @@ class ParentsLoginForm extends React.Component {
 			</div>
   	);
 	}
-
 }
 
 ParentsLoginForm.propTypes = {
