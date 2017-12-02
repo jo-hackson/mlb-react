@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import ParentsLoginForm from '../forms/ParentsLoginForm';
 import KidsLoginForm from '../forms/KidsLoginForm';
 import Tabs from '../pieces/Tabs';
@@ -7,9 +9,7 @@ import Pane from '../pieces/Pane';
 
 class LoginPage extends React.Component {
 
-	submit = (data) => {
-		console.log(data);
-	};
+	submit = (data) => this.props.login(data).then(() => this.props.history.push('/'));
   
 	render() { 
 		return (
@@ -34,11 +34,16 @@ class LoginPage extends React.Component {
 			</div>
 		);
 	}
-
-
 };
 
-export default LoginPage;
+LoginPage.propTypes = {
+	history: PropTypes.shape({
+		push: PropTypes.func.isRequired
+	}).isRequired,
+	login: PropTypes.func.isRequired
+}
+
+export default connect()(LoginPage);
 
 
 
