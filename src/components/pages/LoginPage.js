@@ -6,6 +6,7 @@ import ParentsLoginForm from '../forms/ParentsLoginForm';
 import KidsLoginForm from '../forms/KidsLoginForm';
 import Tabs from '../pieces/Tabs';
 import Pane from '../pieces/Pane';
+import { login } from '../../actions/auth';
 
 class LoginPage extends React.Component {
 
@@ -24,7 +25,7 @@ class LoginPage extends React.Component {
 		  		</Pane>
 		  		<Pane label="kid login">
 		  			<div className="ui bottom attached tab segment active" >
-		  				<KidsLoginForm />
+		  				<KidsLoginForm submit={this.submit}/>
 		  			</div>
 		  		</Pane>
 		  	</Tabs>
@@ -43,7 +44,6 @@ LoginPage.propTypes = {
 	login: PropTypes.func.isRequired
 }
 
-export default connect()(LoginPage);
-
+export default connect(null, { login } )(LoginPage);
 
 

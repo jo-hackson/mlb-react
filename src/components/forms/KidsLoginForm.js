@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Button } from 'semantic-ui-react';
+import { Form, Button, Message } from 'semantic-ui-react';
 import Validator from 'validator';
 import InlineError from '../messages/InlineError';
 
@@ -19,7 +19,8 @@ class KidsLoginForm extends React.Component{
 		const errors = this.validate(this.state.data);
 		this.setState({ errors });
 		if (Object.keys(errors).length === 0) {
-			this.props.submit(this.state.data);
+			this.props.submit(this.state.data)
+				.catch(err => this.setState({ errors: err.response.data.errors }));
 		}
 	};
 
@@ -30,7 +31,6 @@ class KidsLoginForm extends React.Component{
 
 	validate = (data) => {
 		const errors = {};
-		if (!Validator.isEmail(data.secretCode)) errors.secretCode = 'invalid secret code';
 		if (!data.password) errors.password = 'cannot be blank';
 		return errors;
 	};
@@ -41,6 +41,11 @@ class KidsLoginForm extends React.Component{
 		return (
 			<div>
 				<Form onSubmit={this.onSubmit}>
+					{ errors.global && (<Message negative>
+						<Message.Header>something went wrong</Message.Header>
+						<p>{errors.global}</p>
+						</Message>
+					)}
 					<Form.Field error={!!errors.secretCode}>
 						<label htmlFor="secretCode">secret code</label>
 						<input
