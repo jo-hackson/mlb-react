@@ -19,8 +19,10 @@ class ParentsLoginForm extends React.Component {
 		const errors = this.validate(this.state.data);
 		this.setState({ errors });
 		if (Object.keys(errors).length === 0) {
+			this.setState({ loading: true });
 			this.props.submit(this.state.data)
-				.catch(err => this.setState({ errors: err.response.data.errors }));
+				.catch(err => this.setState({ errors: err.response.data.errors, loading: false })
+			);
 		}
 	};
 
@@ -37,11 +39,11 @@ class ParentsLoginForm extends React.Component {
 	};
 
 	render() {
-		const { data, errors } = this.state;
+		const { data, errors, loading } = this.state;
 
 		return (
 			<div>
-				<Form onSubmit={this.onSubmit}>
+				<Form onSubmit={this.onSubmit} loading={loading}>
 					{ errors.global && (<Message negative> 
 						<Message.Header>something went wrong</Message.Header>
 						<p>{errors.global}</p>
