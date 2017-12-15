@@ -22,11 +22,16 @@ class SignupForm extends React.Component {
 		});
 
 	onSubmit = event => {
-		event.preventDefault;
+		event.preventDefault();
 		const errors = this.validate(this.state.data);
 		this.setState({ errors });
 		if (Object.keys(errors).length === 0) {
 			this.setState({ loading: true });
+			this.props
+				.submit(this.state.data)
+				.catch(err => 
+					this.setState({ errors: err.response.data.errors, loading: false})
+				);
 		}
 	};
 
@@ -44,7 +49,7 @@ class SignupForm extends React.Component {
 
 		return (
 			<div>
-				<Form onSubmit={this.onSubmit}>
+				<Form onSubmit={this.onSubmit} loading={loading} >
 					<Form.Field error={!!errors.email}>
 						<label htmlFor="email">email</label>
 						<input

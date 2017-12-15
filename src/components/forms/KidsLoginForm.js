@@ -14,7 +14,8 @@ class KidsLoginForm extends React.Component{
 		errors: {}
 	};
 
-	onSubmit = () => {
+	onSubmit = event => {
+		event.preventDefault();
 		const errors = this.validate(this.state.data);
 		this.setState({ errors });
 		if (Object.keys(errors).length === 0) {
