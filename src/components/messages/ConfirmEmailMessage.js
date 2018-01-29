@@ -7,7 +7,6 @@ const ConfirmEmailMessage = () => (
 		<Message info>
 			<Message.Header>please verify email</Message.Header>
 		</Message>
-		<h1>this is dashboard page</h1>
 	</div>
 );
 

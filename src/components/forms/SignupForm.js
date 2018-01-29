@@ -1,15 +1,18 @@
 import React from 'react';
-import { Form, Button } from 'semantic-ui-react';
+import { Form, Button, Radio } from 'semantic-ui-react';
 import InlineError from '../messages/InlineError';
 import PropTypes from 'prop-types';
 import isEmail from 'validator/lib/isEmail';
+import Gender from '../pieces/GenderRadioButtons';
 
 class SignupForm extends React.Component {
 
 	state = {
 		data: {
 			email: '',
-			password: ''
+			password: '',
+			lastName: '',
+			gender: ''
 		},
 		loading: false,
 		errors: {}
@@ -20,6 +23,16 @@ class SignupForm extends React.Component {
 			...this.state,
 			data: { ...this.state.data, [event.target.name]: event.target.value }
 		});
+
+	onGenderChange = event =>
+		this.setState({
+			gender: event.currentTarget.value
+		});
+
+	handleChange = (e) => 
+		this.setState({ 
+			data: { gender: e.currentTarget.value }
+	});
 
 	onSubmit = event => {
 		event.preventDefault();
@@ -40,6 +53,8 @@ class SignupForm extends React.Component {
 
 		if (!isEmail(data.email)) errors.email = 'invalid email';
 		if (!data.password) errors.password = 'cannot be blank';
+		if (!data.lastName) errors.lastName = 'cannot be blank';
+		if (!data.gender) errors.gender = 'select a gender';
 
 		return errors;
 	};
@@ -74,6 +89,44 @@ class SignupForm extends React.Component {
 						/>
 						{errors.password && <InlineError text={errors.password} />}
 					</Form.Field>
+					<Form.Field error={!!errors.lastName}>
+						<label htmlFor="lastName">last name</label>
+						<input
+							type="text"
+							id="lastName"
+							name="lastName"
+							placeholder="last name"
+							value={data.lastName}
+							onChange={this.onChange}
+						/>
+						{errors.lastName && <InlineError text={errors.lastName} />}
+					</Form.Field>
+
+					{ /* need to figure out how to get state of another object */ }
+					{ /* <Gender  /> */}
+					<Form.Field error={!!errors.gender}>
+	          gender: <b>{this.state.value}</b>
+	        </Form.Field>
+	        <Form.Field>
+	          <Radio
+	            label='male'
+	            name='gender'
+	            value='male'
+	            checked={this.state.value === 'male'}
+	            onChange={this.handleChange}
+	          />
+	        </Form.Field>
+	        <Form.Field>
+	          <Radio
+	            label='female'
+	            name='gender'
+	            value='female'
+	            checked={this.state.value === 'female'}
+	            onChange={this.handleChange}
+	          />
+	        </Form.Field>
+					{errors.gender && <InlineError text={errors.gender} />}
+
 					<Button primary>login</Button>
 				</Form>
 		  </div>
