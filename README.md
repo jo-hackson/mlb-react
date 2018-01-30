@@ -1,4 +1,4 @@
-My Little Banker
+# My Little Banker
 
 Banking app for children to teach about financial responsibility.
 
