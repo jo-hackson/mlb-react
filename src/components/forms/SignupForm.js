@@ -60,7 +60,7 @@ class SignupForm extends React.Component {
 	};
 
 	render() {
-		const { data, errors, loading } = this.state;
+		const { data, errors, loading, gender } = this.state;
 
 		return (
 			<div>
@@ -105,14 +105,14 @@ class SignupForm extends React.Component {
 					{ /* need to figure out how to get state of another object */ }
 					{ /* <Gender  /> */}
 					<Form.Field error={!!errors.gender}>
-	          gender: <b>{this.state.value}</b>
+	          gender: <b>{data.gender}</b>
 	        </Form.Field>
 	        <Form.Field>
 	          <Radio
-	            label='male'
-	            name='gender'
-	            value='male'
-	            checked={this.state.value === 'male'}
+	            label="male"
+	            name="gender"
+	            value="male"
+	            checked={true}
 	            onChange={this.handleChange}
 	          />
 	        </Form.Field>
@@ -127,7 +127,7 @@ class SignupForm extends React.Component {
 	        </Form.Field>
 					{errors.gender && <InlineError text={errors.gender} />}
 
-					<Button primary>login</Button>
+					<Button primary>signup</Button>
 				</Form>
 		  </div>
 		);
