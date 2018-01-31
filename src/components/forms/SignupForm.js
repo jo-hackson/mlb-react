@@ -1,9 +1,11 @@
 import React from 'react';
 import { Form, Button, Radio } from 'semantic-ui-react';
-import InlineError from '../messages/InlineError';
+import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import PropTypes from 'prop-types';
 import isEmail from 'validator/lib/isEmail';
+import InlineError from '../messages/InlineError';
 import Gender from '../pieces/GenderRadioButtons';
+
 
 class SignupForm extends React.Component {
 
@@ -16,24 +18,22 @@ class SignupForm extends React.Component {
 		},
 		loading: false,
 		errors: {}
-	}
+	};
 
-	onChange = event =>
+	onChange = event => {
 		this.setState({
 			...this.state,
 			data: { ...this.state.data, [event.target.name]: event.target.value }
 		});
+	};
 
-	onGenderChange = event =>
+	onGenderChange = event => {
 		this.setState({
-			gender: event.currentTarget.value
+			...this.state,
+			data: { ...this.state.data, gender: event }
 		});
-
-	handleChange = (e) => 
-		this.setState({ 
-			data: { gender: e.currentTarget.value }
-	});
-
+	};
+		
 	onSubmit = event => {
 		event.preventDefault();
 		const errors = this.validate(this.state.data);
@@ -60,7 +60,7 @@ class SignupForm extends React.Component {
 	};
 
 	render() {
-		const { data, errors, loading, gender } = this.state;
+		const { data, errors, loading } = this.state;
 
 		return (
 			<div>
@@ -102,30 +102,16 @@ class SignupForm extends React.Component {
 						{errors.lastName && <InlineError text={errors.lastName} />}
 					</Form.Field>
 
-					{ /* need to figure out how to get state of another object */ }
-					{ /* <Gender  /> */}
-					<Form.Field error={!!errors.gender}>
-	          gender: <b>{data.gender}</b>
-	        </Form.Field>
-	        <Form.Field>
-	          <Radio
-	            label="male"
-	            name="gender"
-	            value="male"
-	            checked={true}
-	            onChange={this.handleChange}
-	          />
-	        </Form.Field>
-	        <Form.Field>
-	          <Radio
-	            label='female'
-	            name='gender'
-	            value='female'
-	            checked={this.state.value === 'female'}
-	            onChange={this.handleChange}
-	          />
-	        </Form.Field>
-					{errors.gender && <InlineError text={errors.gender} />}
+	        gender: <b>{data.gender}</b>
+					<RadioGroup onChange={this.onGenderChange}>
+					  <RadioButton value="male">
+					    male
+					  </RadioButton>
+					  <RadioButton value="female">
+					    female
+					  </RadioButton>
+					</RadioGroup>
+						{errors.gender && <InlineError text={errors.gender} />}	
 
 					<Button primary>signup</Button>
 				</Form>
