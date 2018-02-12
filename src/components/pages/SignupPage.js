@@ -7,9 +7,10 @@ import { signup } from '../../actions/users';
 
 class SignupPage extends React.Component {
 	
-	submit = data =>
-		console.log(data)
-    // this.props.signup(data).then(() => this.props.history.push("/dashboard"));
+	submit = data => {
+    this.props.signup(data).then(() => this.props.history.push("/dashboard"));
+	}
+		
 
 	render() {
 		return (
