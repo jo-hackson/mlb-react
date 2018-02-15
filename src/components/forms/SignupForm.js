@@ -3,7 +3,6 @@ import { Form, Button, Checkbox } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import isEmail from 'validator/lib/isEmail';
 import InlineError from '../messages/InlineError';
-import GenderRadioButtons from '../pieces/GenderRadioButtons';
 
 class SignupForm extends React.Component {
 
@@ -32,7 +31,6 @@ class SignupForm extends React.Component {
 		
 	onSubmit = event => {
 		event.preventDefault();
-		console.log(this.state.data);
 		const errors = this.validate(this.state.data);
 		this.setState({ errors });
 		// if (Object.keys(errors).length === 0) {
@@ -120,23 +118,6 @@ class SignupForm extends React.Component {
 							onChange={this.onGenderChange}
 						/>
 					</Form.Field>
-
-					{/* need to update gender from this value to this state  */}
-
-					{/* <Form.Field>
-						<GenderRadioButtons value={data.gender} onGenderChange={this.onGenderChange} />
-					</Form.Field> */}
-
-	        {/* gender: <b>{data.gender}</b>
-					<RadioGroup onChange={this.onGenderChange}>
-					  <RadioButton value="male">
-					    male
-					  </RadioButton>
-					  <RadioButton value="female">
-					    female
-					  </RadioButton>
-					</RadioGroup>
-						{errors.gender && <InlineError text={errors.gender} />}	 */}
 
 					<Button primary>signup</Button>
 				</Form>
