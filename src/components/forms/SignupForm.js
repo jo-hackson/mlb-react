@@ -1,11 +1,10 @@
 import React from 'react';
-import { Form, Button, Radio } from 'semantic-ui-react';
-import { RadioGroup, RadioButton } from 'react-radio-buttons';
+import { Form, Button } from 'semantic-ui-react';
+// import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import PropTypes from 'prop-types';
 import isEmail from 'validator/lib/isEmail';
 import InlineError from '../messages/InlineError';
-import Gender from '../pieces/GenderRadioButtons';
-
+import GenderRadioButtons from '../pieces/GenderRadioButtons';
 
 class SignupForm extends React.Component {
 
@@ -21,6 +20,9 @@ class SignupForm extends React.Component {
 	};
 
 	onChange = event => {
+		console.log("hello on change");
+		console.log(event.target.name);
+		console.log(event.target.value);
 		this.setState({
 			...this.state,
 			data: { ...this.state.data, [event.target.name]: event.target.value }
@@ -28,14 +30,17 @@ class SignupForm extends React.Component {
 	};
 
 	onGenderChange = event => {
+		console.log("hello");
+		console.log(event.target.value);
 		this.setState({
 			...this.state,
-			data: { ...this.state.data, gender: event }
+			data: { ...this.state.data, gender: event.target.value }
 		});
 	};
 		
 	onSubmit = event => {
 		event.preventDefault();
+		console.log(this.state.data);
 		const errors = this.validate(this.state.data);
 		this.setState({ errors });
 		if (Object.keys(errors).length === 0) {
@@ -103,7 +108,32 @@ class SignupForm extends React.Component {
 						{errors.lastName && <InlineError text={errors.lastName} />}
 					</Form.Field>
 
-	        gender: <b>{data.gender}</b>
+					<Form.Field>
+						<label htmlFor="gender">gender</label>
+						<input
+							type="radio"
+							id="gender"
+							name="gender"
+							value={data.gender}
+							onChange={this.onChange}
+						/>
+						<option>male</option>
+						<option>female</option>
+					</Form.Field>
+
+					{/* need to update gender from this value to this state
+
+					<Form.Field>
+						<GenderRadioButtons 
+							type="select"
+							id="gender"
+							name="gender"
+							value={data.gender}
+							onChange={this.onChange}
+						/>
+					</Form.Field> */}
+
+	        {/* gender: <b>{data.gender}</b>
 					<RadioGroup onChange={this.onGenderChange}>
 					  <RadioButton value="male">
 					    male
@@ -112,7 +142,7 @@ class SignupForm extends React.Component {
 					    female
 					  </RadioButton>
 					</RadioGroup>
-						{errors.gender && <InlineError text={errors.gender} />}	
+						{errors.gender && <InlineError text={errors.gender} />}	 */}
 
 					<Button primary>signup</Button>
 				</Form>

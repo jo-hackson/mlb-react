@@ -5,31 +5,26 @@ class GenderRadioButtons extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      selectedOption: ''
-    };
+    this.state = { gender: ''};
   };
 
-  handleChange = event => {
-    console.log(event.target.value);
-    this.setState({
-      selectedOption: event.ctarget.value
-    });
-  };
+  handleChange = (event, { gender }) => {
+    this.setState({ gender });
+  }
 
   render() {
+
     return (
     	<div>
         <Form.Field>
-          gender: <b>{this.state.selectedOption}</b>
+          gender: <b>{this.state.gender}</b>
         </Form.Field>
         <Form.Field>
           <Radio
             label='male'
             name='gender'
-            value='male'
-            checked={this.state.selectedOption === 'male'}
+            gender='male'
+            checked={this.state.gender === 'male'}
             onChange={this.handleChange}
           />
         </Form.Field>
@@ -37,8 +32,8 @@ class GenderRadioButtons extends React.Component {
           <Radio
             label='female'
             name='gender'
-            value='female'
-            checked={this.state.selectedOption === 'female'}
+            gender='female'
+            checked={this.state.gender === 'female'}
             onChange={this.handleChange}
           />
         </Form.Field>
