@@ -1,11 +1,9 @@
 import React from 'react';
-import { Form, Button, Radio } from 'semantic-ui-react';
-import { RadioGroup, RadioButton } from 'react-radio-buttons';
+import { Form, Button, Checkbox } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import isEmail from 'validator/lib/isEmail';
 import InlineError from '../messages/InlineError';
-import Gender from '../pieces/GenderRadioButtons';
-
+import GenderRadioButtons from '../pieces/GenderRadioButtons';
 
 class SignupForm extends React.Component {
 
@@ -22,30 +20,29 @@ class SignupForm extends React.Component {
 
 	onChange = event => {
 		this.setState({
-			...this.state,
 			data: { ...this.state.data, [event.target.name]: event.target.value }
 		});
 	};
 
-	onGenderChange = event => {
+	onGenderChange = (event, {value}) => {
 		this.setState({
-			...this.state,
-			data: { ...this.state.data, gender: event }
+			data: { ...this.state.data, gender: {value}.value }
 		});
 	};
 		
 	onSubmit = event => {
 		event.preventDefault();
+		console.log(this.state.data);
 		const errors = this.validate(this.state.data);
 		this.setState({ errors });
-		if (Object.keys(errors).length === 0) {
-			this.setState({ loading: true });
-			this.props
-				.submit(this.state.data)
-				.catch(err => 
-					this.setState({ errors: err.response.data.errors, loading: false})
-				);
-		}
+		// if (Object.keys(errors).length === 0) {
+		// 	this.setState({ loading: true });
+		// 	this.props
+		// 		.submit(this.state.data)
+		// 		.catch(err => {
+		// 			this.setState({ errors: err.response.data.errors, loading: false})
+		// 		});
+		// }
 	};
 
 	validate = data => {
@@ -102,7 +99,35 @@ class SignupForm extends React.Component {
 						{errors.lastName && <InlineError text={errors.lastName} />}
 					</Form.Field>
 
-	        gender: <b>{data.gender}</b>
+					<Form.Field>
+						<Checkbox
+							radio 
+							label="male"
+							name="gender"
+							value="male"
+							checked={data.gender === "male"}
+							onChange={this.onGenderChange}
+						/>
+					</Form.Field>
+
+					<Form.Field>
+						<Checkbox
+							radio 
+							label="female"
+							name="gender"
+							value="female"
+							checked={data.gender === "female"}
+							onChange={this.onGenderChange}
+						/>
+					</Form.Field>
+
+					{/* need to update gender from this value to this state  */}
+
+					{/* <Form.Field>
+						<GenderRadioButtons value={data.gender} onGenderChange={this.onGenderChange} />
+					</Form.Field> */}
+
+	        {/* gender: <b>{data.gender}</b>
 					<RadioGroup onChange={this.onGenderChange}>
 					  <RadioButton value="male">
 					    male
@@ -111,7 +136,7 @@ class SignupForm extends React.Component {
 					    female
 					  </RadioButton>
 					</RadioGroup>
-						{errors.gender && <InlineError text={errors.gender} />}	
+						{errors.gender && <InlineError text={errors.gender} />}	 */}
 
 					<Button primary>signup</Button>
 				</Form>

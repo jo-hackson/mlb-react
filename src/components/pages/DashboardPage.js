@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 // import ConfirmEmailMessage from '../messages/ConfirmEmailMessage';
 import AddChildForm from '../forms/AddChildForm';
 import { addChild } from '../../actions/parents';
+import Parent from '../../components/people/Parent';
 
 class DashboardPage extends React.Component {
 
@@ -16,6 +17,7 @@ class DashboardPage extends React.Component {
 
 				<div>
 					<AddChildForm submit={this.submit} />
+					<Parent />
 				</div>
 			</div>
 		);

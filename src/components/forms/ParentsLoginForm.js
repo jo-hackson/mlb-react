@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button, Message } from 'semantic-ui-react';
 import Validator from 'validator';
 import InlineError from '../messages/InlineError';
 
-class ParentsLoginForm extends React.Component {
+class ParentsLoginForm extends Component {
 	
 	state = {
 		data: {
@@ -21,7 +21,8 @@ class ParentsLoginForm extends React.Component {
 		this.setState({ errors });
 		if (Object.keys(errors).length === 0) {
 			this.setState({ loading: true });
-			this.props.submit(this.state.data)
+			this.props
+				.submit(this.state.data)
 				.catch(err => this.setState({ errors: err.response.data.errors, loading: false })
 			);
 		}
