@@ -1,15 +1,10 @@
 import React from 'react';
-import { Form, Radio } from 'semantic-ui-react';
+import { Form, Checkbox } from 'semantic-ui-react';
 
 class GenderRadioButtons extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { gender: ''};
-  };
-
-  handleChange = (event, { gender }) => {
-    this.setState({ gender });
   }
 
   render() {
@@ -17,24 +12,21 @@ class GenderRadioButtons extends React.Component {
     return (
     	<div>
         <Form.Field>
-          gender: <b>{this.state.gender}</b>
-        </Form.Field>
-        <Form.Field>
-          <Radio
+          <Checkbox
+            radio
             label='male'
             name='gender'
-            gender='male'
-            checked={this.state.gender === 'male'}
-            onChange={this.handleChange}
+            value='male'
+            onChange={this.props.onGenderChange}
           />
         </Form.Field>
         <Form.Field>
-          <Radio
+          <Checkbox
+          radio
             label='female'
             name='gender'
-            gender='female'
-            checked={this.state.gender === 'female'}
-            onChange={this.handleChange}
+            value='female'
+            onChange={this.props.onGenderChange}
           />
         </Form.Field>
       </div>
