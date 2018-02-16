@@ -30,6 +30,7 @@ class ParentsLoginForm extends Component {
 
 	onChange = (event) => 
 		this.setState({ 
+			...this.state,
 			data: { ...this.state.data, [event.target.name]: event.target.value }
 		});
 
