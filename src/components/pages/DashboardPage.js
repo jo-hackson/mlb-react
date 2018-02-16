@@ -8,12 +8,11 @@ import { connect } from 'react-redux';
 class DashboardPage extends React.Component {
 
 	render() {
-		const { gender, lastName } = this.props;
+		const { gender, lastName, isMale } = this.props;
 		return (
 			<div>
 				<h1>dashboard page</h1>
-
-				<h2><GenderSalutation gender={gender}/> {lastName}</h2>
+				<h2>{ isMale ? <span>Mr.</span> : <span>Mrs.</span> } { lastName } </h2>
 
 			</div>
 		);
@@ -28,15 +27,10 @@ DashboardPage.propTypes = {
 function mapStateToProps(state) {
 	return {
 		gender: state.user.gender,
-		lastName: state.user.lastName
+		lastName: state.user.lastName,
+		isMale: state.user.gender === 'male'
 	};
 };
 
-function GenderSalutation(gender) {
-  if (gender.gender === 'male') {
-    return <span>Mr.</span>;
-  }
-  return <span>Mrs.</span>;
-}
 
 export default connect(mapStateToProps)(DashboardPage);
