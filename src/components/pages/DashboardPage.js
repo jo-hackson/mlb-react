@@ -33,7 +33,6 @@ DashboardPage.propTypes = {
 };
 
 function mapStateToProps(state) {
-	console.log(state);
 	return {
 		gender: state.user.gender,
 		lastName: state.user.lastName,
