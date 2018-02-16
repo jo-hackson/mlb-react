@@ -13,7 +13,7 @@ class DashboardPage extends React.Component {
 			<div>
 				<h1>dashboard page</h1>
 
-				<GenderSalutation gender={gender}/> <h2>{lastName}</h2>
+				<h2><GenderSalutation gender={gender}/> {lastName}</h2>
 
 			</div>
 		);
@@ -34,9 +34,9 @@ function mapStateToProps(state) {
 
 function GenderSalutation(gender) {
   if (gender.gender === 'male') {
-    return <h2>Mr.</h2>;
+    return <span>Mr.</span>;
   }
-  return <h2>Mrs.</h2>;
+  return <span>Mrs.</span>;
 }
 
 export default connect(mapStateToProps)(DashboardPage);
