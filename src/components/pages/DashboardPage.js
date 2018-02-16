@@ -14,8 +14,8 @@ class DashboardPage extends React.Component {
 		const { gender, lastName, isMale, logout } = this.props;
 		return (
 			<div>
-				<Link to="/"><i className="circular home icon"></i></Link>
-				<Button className="circular basic icon" onClick={() => logout()}><i className="circular log out icon"></i></Button>
+				<Link to="/"><i className="circular home icon blue"></i></Link>
+				<i onClick={() => logout()}><i className="circular log out icon blue"></i></i>
 				<h1>dashboard page</h1>
 				<h2>{ isMale ? <span>Mr.</span> : <span>Mrs.</span> } { lastName } </h2>
 			</div>
