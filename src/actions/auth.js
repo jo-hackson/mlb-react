@@ -13,7 +13,9 @@ import setAuthorizationHeader from "../utils/setAuthorizationHeader";
 
 export const login = credentials => dispatch =>
   api.user.login(credentials).then(user => {
-    localStorage.bookwormJWT = user.token;
+    localStorage.mlbJWT = user.token;
+    localStorage.gender = user.gender;
+    localStorage.lastName = user.lastName;
     setAuthorizationHeader(user.token);
     dispatch(userLoggedIn(user));
   });
