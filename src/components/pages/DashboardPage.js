@@ -17,7 +17,7 @@ class DashboardPage extends React.Component {
 				<Link to="/"><i className="circular home icon blue"></i></Link>
 				<i onClick={() => logout()}><i className="circular log out icon blue"></i></i>
 				<h1>dashboard page</h1>
-				<h2>{ isMale ? <span>Mr.</span> : <span>Mrs.</span> } { lastName } </h2>
+				<h2>Welcome { isMale ? <span>Mr.</span> : <span>Mrs.</span> } { lastName } </h2>
 			</div>
 		);
 	};
