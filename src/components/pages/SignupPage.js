@@ -31,5 +31,6 @@ SignupPage.propTypes = {
 };
 
 export default connect(null, { signup })(SignupPage);
+// first argument is what is needed from the state
 
 
