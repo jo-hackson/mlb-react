@@ -17,7 +17,11 @@ const store = createStore(
 );
 
 if (localStorage.mlbJWT) {
-	const user = { token: localStorage.mlbJWT, gender: localStorage.gender, lastName: localStorage.lastName };
+	const user = { 
+		token: localStorage.mlbJWT, 
+		gender: localStorage.gender, 
+		lastName: localStorage.lastName 
+	};
 	store.dispatch(userLoggedIn(user));
 }
 
