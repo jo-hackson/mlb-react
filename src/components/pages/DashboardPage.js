@@ -7,8 +7,28 @@ import { Button } from 'semantic-ui-react';
 // import ConfirmEmailMessage from '../messages/ConfirmEmailMessage';
 import AddChildForm from '../forms/AddChildForm';
 // import { addChild } from '../../actions/parents';
+import { login } from '../../actions/auth';
+
 
 class DashboardPage extends React.Component {
+
+	constructor() {
+		super();
+		this.state = {
+			isAddChildFormClicked: false
+		}
+
+		this.showAddChildForm = this.showAddChildForm.bind(this);
+	}
+
+	showAddChildForm() {
+		this.setState( prevState => ({
+			isAddChildFormClicked: !prevState.isAddChildFormClicked
+		}));
+	}
+
+	submit = (data) => this.props.login(data).then(() => this.props.history.push('/dashboard'));
+
 
 	render() {
 		const { gender, lastName, isMale, logout } = this.props;
@@ -20,7 +40,8 @@ class DashboardPage extends React.Component {
 				<h1>dashboard page</h1>
 				<h2>Welcome { isMale ? <span>Mr.</span> : <span>Mrs.</span> } { lastName } </h2>
 
-			{/* <AddChildForm /> */}
+				{this.state.isAddChildFormClicked ? <AddChildForm /> : <Button onClick={this.showAddChildForm} className="basic blue">add child</Button>}
+
 			</div>
 		);
 	};
@@ -39,6 +60,8 @@ function mapStateToProps(state) {
 		isMale: state.user.gender === 'male'
 	};
 };
+
+
 
 
 export default connect(mapStateToProps, { logout: actions.logout })(DashboardPage);

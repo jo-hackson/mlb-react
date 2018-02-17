@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Form, Button, Message } from 'semantic-ui-react';
 import Validator from 'validator';
 import InlineError from '../messages/InlineError';
-import Gender from '../pieces/GenderRadioButtons';
+
 
 class AddChildForm extends React.Component{
 
@@ -15,6 +15,8 @@ class AddChildForm extends React.Component{
 		loading: false,
 		errors: {}
 	};
+
+
 
 	onSubmit = event => {
 		event.preventDefault();
