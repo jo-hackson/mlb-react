@@ -25,3 +25,4 @@ export const logout = () => dispatch => {
   setAuthorizationHeader();
   dispatch(userLoggedOut());
 };
+
