@@ -1,13 +1,17 @@
+// need to create some methods for when child is added
+
+
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
-import * as actions from '../../actions/auth';
 import { Button } from 'semantic-ui-react';
-// import ConfirmEmailMessage from '../messages/ConfirmEmailMessage';
+import { logout } from '../../actions/auth';
+import * as actions from '../../actions/parents';
 import AddChildForm from '../forms/AddChildForm';
-// import { addChild } from '../../actions/parents';
-import { login } from '../../actions/auth';
+// import ConfirmEmailMessage from '../messages/ConfirmEmailMessage';
+// import { login } from '../../actions/auth';
 
 
 class DashboardPage extends React.Component {
@@ -27,11 +31,11 @@ class DashboardPage extends React.Component {
 		}));
 	}
 
-	submit = (data) => this.props.login(data).then(() => this.props.history.push('/dashboard'));
+	submit = (data) => this.props.addChild(data).then(() => this.props.history.push('/dashboard'));
 
 
 	render() {
-		const { gender, lastName, isMale, logout } = this.props;
+		const { lastName, isMale } = this.props;
 
 		return (
 			<div>
@@ -40,7 +44,7 @@ class DashboardPage extends React.Component {
 				<h1>dashboard page</h1>
 				<h2>Welcome { isMale ? <span>Mr.</span> : <span>Mrs.</span> } { lastName } </h2>
 
-				{this.state.isAddChildFormClicked ? <AddChildForm /> : <Button onClick={this.showAddChildForm} className="basic blue">add child</Button>}
+				{this.state.isAddChildFormClicked ? <AddChildForm submit={this.submit} /> : <Button onClick={this.showAddChildForm} className="basic blue">add child</Button>}
 
 			</div>
 		);
@@ -48,9 +52,12 @@ class DashboardPage extends React.Component {
 };
 
 DashboardPage.propTypes = {
-	gender: PropTypes.string,
-	lastName: PropTypes.string,
-	logout: PropTypes.func.isRequired
+	lastName: PropTypes.string.isRequired,
+	isMale: PropTypes.bool.isRequired,
+	addChild: PropTypes.func.isRequired,
+	history: PropTypes.shape({
+		push: PropTypes.func.isRequired
+	}).isRequired,
 };
 
 function mapStateToProps(state) {
@@ -64,4 +71,4 @@ function mapStateToProps(state) {
 
 
 
-export default connect(mapStateToProps, { logout: actions.logout })(DashboardPage);
+export default connect(mapStateToProps, { addChild: actions.addChild })(DashboardPage);

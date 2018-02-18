@@ -16,9 +16,8 @@ class AddChildForm extends React.Component{
 		errors: {}
 	};
 
-
-
 	onSubmit = event => {
+		console.log(this.state.data)
 		event.preventDefault();
 		const errors = this.validate(this.state.data);
 		this.setState({ errors });
@@ -83,7 +82,6 @@ class AddChildForm extends React.Component{
 					<Button primary>add child</Button>
 				</Form>
 			</div>
-
 		)
 	}
 };
